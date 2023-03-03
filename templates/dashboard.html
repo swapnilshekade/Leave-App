@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+	<div class="dashboard-container">
+		<h1>Welcome to the Dashboard!</h1>
+		<p>You are logged in as {{ username }}.</p>
+		<div class="forms-container">
+			<div class="form">
+				<h2>Leave Application</h2>
+				<form id="leave-form" action="#" method="post">
+					<label for="start-date">Start Date:</label>
+					<input type="date" id="start-date" name="start-date" min="{{ today }}" required><br>
+					<label for="end-date">End Date:</label>
+					<input type="date" id="end-date" name="end-date" min="{{ today }}" required><br>
+					
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+			<div class="form">
+				<h2>WFH Application</h2>
+				<form id="wfh-form" action="#" method="post">
+					<label for="wfh-date">Start Date:</label>
+					<input type="date" id="wfh-date" name="wfh-date" min="{{ today }}" required><br>
+					<label for="wfh-end-date">End Date:</label>
+					<input type="date" id="wfh-end-date" name="wfh-end-date" min="{{ today }}" required><br>
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+		<div id="success-message" style="display: none; color: green;">Application submitted successfully!</div>
+	</div>
+	<script>
+		var today = new Date().toISOString().split('T')[0];
+		document.getElementsByName("start-date")[0].setAttribute('min', today);
+		document.getElementsByName("end-date")[0].setAttribute('min', today);
+		document.getElementsByName("wfh-date")[0].setAttribute('min', today);
+		document.getElementsByName("wfh-end-date")[0].setAttribute('min', today);
+
+		document.getElementById("leave-form").addEventListener("submit", function(e) {
+			e.preventDefault();
+			// Code to handle the submission of the leave form
+			document.getElementById("success-message").style.display = "block";
+		});
+
+		document.getElementById("wfh-form").addEventListener("submit", function(e) {
+			e.preventDefault();
+			// Code to handle the submission of the WFH form
+			document.getElementById("success-message").style.display = "block";
+		});
+	</script>
+</body>
+</html>
